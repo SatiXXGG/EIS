@@ -1,0 +1,70 @@
+import { ChildType, CustomEISElements } from ".";
+import { Value } from "./Elements/Value";
+export type UIElement = TextLabel | TextBox | ImageButton | ImageLabel | TextButton | Frame;
+export declare abstract class Element<T extends UIElement, C extends ChildType = {}> {
+    element: T;
+    protected usable: boolean;
+    childs: C;
+    unusable: boolean;
+    constructor(element: T, childs?: C);
+    abstract bindToValue(value: Value<unknown>): void;
+    /**
+     * Destroys the element
+     */
+    destroy(): void;
+    /**
+     * Changes the visibility of the element
+     * @param value
+     */
+    setVisible(value: boolean): void;
+    /**
+     * Changes the visibility of the element for a given amount of seconds
+     * @param secs the amount of seconds that you want to hide the element
+     */
+    hideFor(secs: number): void;
+    runIfUsable<A>(callback: (args: A) => void, args?: A, notUsableCallback?: () => void): void;
+    /**
+     * Changes the usable state of the element
+     * @param value
+     */
+    setUsable(value: boolean): void;
+    bindTransparencyToValue(value: Value<number>): void;
+    bindVisibilityToValue(value: Value<boolean>): void;
+    /**
+     * Tween the element to the desired goal
+     * @param property The property to tween
+     * @param goal The goal to tween to
+     * @param info The tween info
+     */
+    /**
+     * Tween the position of the element to the desired position
+     * @param newPos
+     * @param info
+     * @returns
+     */
+    tweenPos(newPos: UDim2, info?: TweenInfo): Promise<unknown>;
+    /**
+     * Tween the size of the element to the desired size
+     * @param newSize
+     * @param info
+     * @returns
+     */
+    tweenSize(newSize: UDim2, info?: TweenInfo): Promise<unknown>;
+    /**
+     * Changes the background color of the element
+     * @param color
+     */
+    setBackground(color: Color3): void;
+    /**
+     * Tween the background color of the element
+     * @param info
+     */
+    tweenBackground(color: Color3, info?: TweenInfo): Promise<unknown>;
+    /**
+     * Rainbow effect on the element background
+     * @Irreversible
+     */
+    rainbowEffect(speed?: number): void;
+    filterChilds(checker: (child: CustomEISElements) => boolean): Set<CustomEISElements>;
+    destroyChilds(checker: (child: CustomEISElements) => boolean): void;
+}
