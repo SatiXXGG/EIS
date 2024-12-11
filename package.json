@@ -1,11 +1,12 @@
 {
   "name": "@rbxts/eis",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A roblox UI manager with useful utils",
   "main": "out/init.lua",
   "repository": {
     "type": "git",
-    "url": "https://github.com/SatiXXGG/EIS"},
+    "url": "https://github.com/SatiXXGG/EIS"
+  },
   "scripts": {
     "build": "rbxtsc",
     "watch": "rbxtsc -w",
