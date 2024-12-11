@@ -1,6 +1,6 @@
 {
   "name": "@rbxts/eis",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A roblox UI manager with useful utils",
   "main": "out/init.lua",
   "repository": {
@@ -36,7 +36,6 @@
     "roblox-ts": "^3.0.0",
     "typescript": "^5.7.2"
   },
-
   "bugs": {
     "url": "https://github.com/SatiXXGG/EIS/issues"
   },
