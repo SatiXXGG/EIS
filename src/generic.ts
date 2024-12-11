@@ -204,4 +204,24 @@ export abstract class Element<T extends UIElement, C extends ChildType = {}> {
 			}
 		}
 	}
+
+	/**
+	 * Tween the scale on the element
+	 * @param scale
+	 */
+
+	tweenScale(scale: number, info: TweenInfo = new TweenInfo(1)) {
+		const uiScale = this.element.FindFirstAncestorWhichIsA("UIScale");
+		if (uiScale) {
+			const tween = TweenService.Create(uiScale, info, {
+				Scale: scale,
+			});
+			return new Promise((resolve, reject) => {
+				tween.Play();
+				tween.Completed.Once(() => {
+					resolve(true);
+				});
+			});
+		}
+	}
 }
