@@ -1,10 +1,11 @@
 import { UIElement } from "./generic";
+import { CustomFolder } from "./UIElements/CustomFolder";
 import { CustomFrame } from "./UIElements/CustomFrame";
 import { CustomImageButton } from "./UIElements/ImageButton";
 import { CustomTextBox } from "./UIElements/TextBox";
 import { CustomTextButton } from "./UIElements/TextButton";
 import { CustomTextLabel } from "./UIElements/TextLabel";
-export type CustomEISElements = CustomTextLabel | CustomTextButton | CustomFrame | CustomTextBox | CustomImageButton;
+export type CustomEISElements = CustomTextLabel | CustomTextButton | CustomFrame | CustomTextBox | CustomImageButton | CustomFolder;
 export type EISRootCallback = (eis: UIElement) => CustomEISElements;
 export type ChildType = {
     [key: string]: EISRootCallback | CustomEISElements;

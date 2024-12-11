@@ -165,20 +165,34 @@ export abstract class Element<T extends UIElement, C extends ChildType = {}> {
 		});
 	}
 
-	filterChilds(checker: (child: CustomEISElements) => boolean): Set<CustomEISElements> {
-		const filteredItems = new Set<CustomEISElements>();
+	/**
+	 *
+	 * Filters the childs of the given element, with a checker functions if resolves true the child will be not filtered either it will be
+	 * @param checker
+	 * @generic E (Expected element type to be filtered)
+	 * @returns Set<E>
+	 */
+
+	filterChilds<E extends Element<UIElement>>(checker: (child: E) => boolean): Set<E> {
+		const filteredItems = new Set<E>();
 		for (const [name, child] of pairs(this.childs)) {
-			const a = child as CustomEISElements;
+			const a = child as E;
 			if (!a.unusable) {
-				const result = checker(child as CustomEISElements);
+				const result = checker(child as E);
 				print(result);
 				if (result) {
-					filteredItems.add(child as CustomEISElements);
+					filteredItems.add(child as E);
 				}
 			}
 		}
 		return filteredItems;
 	}
+
+	/**
+	 *
+	 * Filters the childs of the given element, with a checker functions if resolves true the child will be deleted either it will not
+	 * @param checker
+	 */
 
 	destroyChilds(checker: (child: CustomEISElements) => boolean) {
 		for (const [name, child] of pairs(this.childs as ChildType)) {
