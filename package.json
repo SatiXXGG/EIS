@@ -5,7 +5,7 @@
   "main": "out/init.lua",
   "repository": {
     "type": "git",
-    "url": "https://github.com/SatiXXGG/EIS"
+    "url": "git+https://github.com/SatiXXGG/EIS.git"
   },
   "scripts": {
     "build": "rbxtsc",
@@ -13,7 +13,7 @@
     "prepublishOnly": "pnpm run build"
   },
   "keywords": [],
-  "author": "",
+  "author": "satixxgg",
   "license": "ISC",
   "types": "out/index.d.ts",
   "files": [
@@ -38,5 +38,9 @@
   },
   "dependencies": {
     "@rbxts/eis": "link:"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/SatiXXGG/EIS/issues"
+  },
+  "homepage": "https://github.com/SatiXXGG/EIS#readme"
 }
