@@ -1,6 +1,6 @@
 {
   "name": "@rbxts/eis",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A roblox UI manager with useful utils",
   "main": "out/init.lua",
   "scripts": {
