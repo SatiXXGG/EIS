@@ -13,16 +13,15 @@ export type CustomEISElements =
 	| CustomTextBox
 	| CustomImageButton
 	| CustomFolder;
-export type EISRootCallback = (eis: UIElement | Folder) => CustomEISElements;
+export type EISRootCallback = (eis: UIElement) => CustomEISElements;
 export type ChildType = { [key: string]: EISRootCallback | CustomEISElements };
 
 interface EISRootElements {
 	[key: string]: EISRootCallback | EISRootElements;
 }
 
-export class EIS<T> {
+export class EIS {
 	private root: EISRootElements;
-	private renderResult?: EISRootElements;
 	private main: ScreenGui;
 
 	constructor(root: EISRootElements, main: ScreenGui) {
@@ -34,7 +33,7 @@ export class EIS<T> {
 	 * MAPS EVERYTHING IN THE ROOT TO THE EIS ELEMENTS
 	 * @yields
 	 */
-	render(): T {
+	render<T>(): T {
 		const setup = (parent: EISRootElements, lastIndexer: UIElement | ScreenGui | Folder) => {
 			for (const [key, value] of pairs(parent)) {
 				const search = lastIndexer.WaitForChild(key, 1) as UIElement | undefined;

@@ -65,6 +65,24 @@ export declare abstract class Element<T extends UIElement, C extends ChildType =
      * @Irreversible
      */
     rainbowEffect(speed?: number): void;
-    filterChilds(checker: (child: CustomEISElements) => boolean): Set<CustomEISElements>;
+    /**
+     *
+     * Filters the childs of the given element, with a checker functions if resolves true the child will be not filtered either it will be
+     * @param checker
+     * @generic E (Expected element type to be filtered)
+     * @returns Set<E>
+     */
+    filterChilds<E extends Element<UIElement>>(checker: (child: E) => boolean): Set<E>;
+    /**
+     *
+     * Filters the childs of the given element, with a checker functions if resolves true the child will be deleted either it will not
+     * @param checker
+     */
     destroyChilds(checker: (child: CustomEISElements) => boolean): void;
+    /**
+     * Tween the scale on the element
+     * @param scale	Amount of scale to tween
+     * @param info Tween info
+     */
+    tweenScale(scale: number, info?: TweenInfo): Promise<unknown> | undefined;
 }

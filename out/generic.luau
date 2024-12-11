@@ -130,6 +130,23 @@ do
 			end
 		end
 	end
+	function Element:tweenScale(scale, info)
+		if info == nil then
+			info = TweenInfo.new(1)
+		end
+		local uiScale = self.element:FindFirstAncestorWhichIsA("UIScale")
+		if uiScale then
+			local tween = TweenService:Create(uiScale, info, {
+				Scale = scale,
+			})
+			return TS.Promise.new(function(resolve, reject)
+				tween:Play()
+				tween.Completed:Once(function()
+					resolve(true)
+				end)
+			end)
+		end
+	end
 end
 return {
 	Element = Element,

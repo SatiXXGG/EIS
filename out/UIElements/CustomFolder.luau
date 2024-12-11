@@ -22,7 +22,6 @@ do
 			local a = child
 			if not a.unusable then
 				local result = checker(child)
-				print(result)
 				if result then
 					filteredItems[child] = true
 				end

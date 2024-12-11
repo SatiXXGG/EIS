@@ -1,11 +1,17 @@
 import { ChildType, CustomEISElements } from "..";
+import { UIElement } from "../generic";
 
 export class CustomFolder<C extends ChildType = {}> {
 	public childs: C;
 	public unusable = false;
 	public element: Folder;
-	constructor(folder: Folder, childs: C) {
-		this.element = folder;
+	/**
+	 * We're working on fixing the type for the folder
+	 * @param folder
+	 * @param childs
+	 */
+	constructor(folder: UIElement, childs: C) {
+		this.element = folder as unknown as Folder;
 		this.childs = childs || ({} as C);
 	}
 
