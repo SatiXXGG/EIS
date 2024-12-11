@@ -212,7 +212,7 @@ export abstract class Element<T extends UIElement, C extends ChildType = {}> {
 	 */
 
 	tweenScale(scale: number, info: TweenInfo = new TweenInfo(1)) {
-		const uiScale = this.element.FindFirstAncestorWhichIsA("UIScale");
+		const uiScale = this.element.FindFirstChildWhichIsA("UIScale");
 		if (uiScale) {
 			const tween = TweenService.Create(uiScale, info, {
 				Scale: scale,
