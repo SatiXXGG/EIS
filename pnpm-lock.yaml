@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@rbxts/eis':
+        specifier: 'link:'
+        version: 'link:'
     devDependencies:
       '@rbxts/compiler-types':
         specifier: 3.0.0-types.0
