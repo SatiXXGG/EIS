@@ -207,7 +207,8 @@ export abstract class Element<T extends UIElement, C extends ChildType = {}> {
 
 	/**
 	 * Tween the scale on the element
-	 * @param scale
+	 * @param scale	Amount of scale to tween
+	 * @param info Tween info
 	 */
 
 	tweenScale(scale: number, info: TweenInfo = new TweenInfo(1)) {
