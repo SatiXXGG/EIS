@@ -36,9 +36,7 @@
     "roblox-ts": "^3.0.0",
     "typescript": "^5.7.2"
   },
-  "dependencies": {
-    "@rbxts/eis": "link:"
-  },
+
   "bugs": {
     "url": "https://github.com/SatiXXGG/EIS/issues"
   },
