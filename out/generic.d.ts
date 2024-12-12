@@ -5,7 +5,11 @@ export declare abstract class Element<T extends UIElement, C extends ChildType =
     element: T;
     protected usable: boolean;
     childs: C;
+    hoverScaleEffect: boolean;
     unusable: boolean;
+    hoverScaleEffectInfo: TweenInfo;
+    private hoverCallbacks;
+    private unHoverCallbacks;
     constructor(element: T, childs?: C);
     abstract bindToValue(value: Value<unknown>): void;
     /**
@@ -85,4 +89,6 @@ export declare abstract class Element<T extends UIElement, C extends ChildType =
      * @param info Tween info
      */
     tweenScale(scale: number, info?: TweenInfo): Promise<unknown> | undefined;
+    onHover(callback: () => void): void;
+    onHoverEnds(callback: () => void): void;
 }

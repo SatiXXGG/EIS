@@ -21,7 +21,7 @@ export abstract class Element<T extends UIElement, C extends ChildType = {}> {
 			if (this.usable) {
 				this.hoverCallbacks.forEach((callback) => callback());
 				if (this.hoverScaleEffect) {
-					this.tweenScale(1.1);
+					this.tweenScale(1.1, this.hoverScaleEffectInfo);
 				}
 			}
 		});
@@ -31,7 +31,7 @@ export abstract class Element<T extends UIElement, C extends ChildType = {}> {
 				this.unHoverCallbacks.forEach((callback) => callback());
 
 				if (this.hoverScaleEffect) {
-					this.tweenScale(1);
+					this.tweenScale(1, this.hoverScaleEffectInfo);
 				}
 			}
 		});

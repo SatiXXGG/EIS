@@ -6,9 +6,45 @@ do
 	Element = {}
 	function Element:constructor(element, childs)
 		self.usable = true
+		self.hoverScaleEffect = false
 		self.unusable = false
+		self.hoverScaleEffectInfo = TweenInfo.new(0.3, Enum.EasingStyle.Elastic, Enum.EasingDirection.Out)
+		self.hoverCallbacks = {}
+		self.unHoverCallbacks = {}
 		self.element = element
 		self.childs = childs or ({})
+		self.element.MouseEnter:Connect(function()
+			if self.usable then
+				local _exp = self.hoverCallbacks
+				-- ▼ ReadonlySet.forEach ▼
+				local _callback = function(callback)
+					return callback()
+				end
+				for _v in _exp do
+					_callback(_v, _v, _exp)
+				end
+				-- ▲ ReadonlySet.forEach ▲
+				if self.hoverScaleEffect then
+					self:tweenScale(1.1)
+				end
+			end
+		end)
+		self.element.MouseLeave:Connect(function()
+			if self.usable then
+				local _exp = self.unHoverCallbacks
+				-- ▼ ReadonlySet.forEach ▼
+				local _callback = function(callback)
+					return callback()
+				end
+				for _v in _exp do
+					_callback(_v, _v, _exp)
+				end
+				-- ▲ ReadonlySet.forEach ▲
+				if self.hoverScaleEffect then
+					self:tweenScale(1)
+				end
+			end
+		end)
 	end
 	function Element:destroy()
 		self.element:Destroy()
@@ -146,6 +182,16 @@ do
 				end)
 			end)
 		end
+	end
+	function Element:onHover(callback)
+		local _hoverCallbacks = self.hoverCallbacks
+		local _callback = callback
+		_hoverCallbacks[_callback] = true
+	end
+	function Element:onHoverEnds(callback)
+		local _unHoverCallbacks = self.unHoverCallbacks
+		local _callback = callback
+		_unHoverCallbacks[_callback] = true
 	end
 end
 return {

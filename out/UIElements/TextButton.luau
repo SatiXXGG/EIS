@@ -20,8 +20,6 @@ do
 		super.constructor(self, element, childs)
 		self.clickCallbacks = {}
 		self.onceClickCallbacks = {}
-		self.hoverCallbacks = {}
-		self.unHoverCallbacks = {}
 		self.hoverScaleEffect = false
 		self.nativeCooldown = false
 		self.cooldownSize = 0.2
@@ -53,38 +51,6 @@ do
 			end
 			-- ▲ ReadonlySet.forEach ▲
 		end)
-		self.element.MouseEnter:Connect(function()
-			if self.usable then
-				local _exp = self.hoverCallbacks
-				-- ▼ ReadonlySet.forEach ▼
-				local _callback = function(callback)
-					return callback()
-				end
-				for _v in _exp do
-					_callback(_v, _v, _exp)
-				end
-				-- ▲ ReadonlySet.forEach ▲
-				if self.hoverScaleEffect then
-					self:tweenScale(1.1)
-				end
-			end
-		end)
-		self.element.MouseLeave:Connect(function()
-			if self.usable then
-				local _exp = self.unHoverCallbacks
-				-- ▼ ReadonlySet.forEach ▼
-				local _callback = function(callback)
-					return callback()
-				end
-				for _v in _exp do
-					_callback(_v, _v, _exp)
-				end
-				-- ▲ ReadonlySet.forEach ▲
-				if self.hoverScaleEffect then
-					self:tweenScale(1)
-				end
-			end
-		end)
 	end
 	function CustomTextButton:onClick(callback)
 		local _clickCallbacks = self.clickCallbacks
@@ -95,16 +61,6 @@ do
 		local _onceClickCallbacks = self.onceClickCallbacks
 		local _callback = callback
 		_onceClickCallbacks[_callback] = true
-	end
-	function CustomTextButton:onHover(callback)
-		local _hoverCallbacks = self.hoverCallbacks
-		local _callback = callback
-		_hoverCallbacks[_callback] = true
-	end
-	function CustomTextButton:onHoverEnds(callback)
-		local _unHoverCallbacks = self.unHoverCallbacks
-		local _callback = callback
-		_unHoverCallbacks[_callback] = true
 	end
 end
 return {
