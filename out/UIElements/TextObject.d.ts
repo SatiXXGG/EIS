@@ -41,4 +41,6 @@ export declare abstract class TextObject<T extends TextLabel | TextButton | Text
      * @Irreversible
      */
     rainbowText(speed?: number): void;
+    setTextColor(color: Color3): void;
+    tweenTextColor(color: Color3, info?: TweenInfo): Promise<unknown>;
 }

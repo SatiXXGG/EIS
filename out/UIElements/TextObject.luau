@@ -1,6 +1,7 @@
 -- Compiled with roblox-ts v3.0.0
 local TS = _G[script]
 local Element = TS.import(script, script.Parent.Parent, "generic").Element
+local TweenService = game:GetService("TweenService")
 local TextObject
 do
 	local super = Element
@@ -69,6 +70,23 @@ do
 					i = 0
 				end
 			end
+		end)
+	end
+	function TextObject:setTextColor(color)
+		self.element.TextColor3 = color
+	end
+	function TextObject:tweenTextColor(color, info)
+		if info == nil then
+			info = TweenInfo.new(1)
+		end
+		local tween = TweenService:Create(self.element, info, {
+			TextColor3 = color,
+		})
+		return TS.Promise.new(function(resolve, reject)
+			tween:Play()
+			tween.Completed:Once(function()
+				resolve(true)
+			end)
 		end)
 	end
 end

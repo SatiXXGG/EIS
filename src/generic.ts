@@ -7,11 +7,34 @@ export abstract class Element<T extends UIElement, C extends ChildType = {}> {
 	public element: T;
 	protected usable: boolean = true;
 	public childs: C;
+	public hoverScaleEffect = false;
 	public unusable = false;
+	public hoverScaleEffectInfo = new TweenInfo(0.3, Enum.EasingStyle.Elastic, Enum.EasingDirection.Out);
+	private hoverCallbacks = new Set<() => void>();
+	private unHoverCallbacks = new Set<() => void>();
 
 	constructor(element: T, childs?: C) {
 		this.element = element;
 		this.childs = childs || ({} as C);
+
+		this.element.MouseEnter.Connect(() => {
+			if (this.usable) {
+				this.hoverCallbacks.forEach((callback) => callback());
+				if (this.hoverScaleEffect) {
+					this.tweenScale(1.1);
+				}
+			}
+		});
+
+		this.element.MouseLeave.Connect(() => {
+			if (this.usable) {
+				this.unHoverCallbacks.forEach((callback) => callback());
+
+				if (this.hoverScaleEffect) {
+					this.tweenScale(1);
+				}
+			}
+		});
 	}
 
 	abstract bindToValue(value: Value<unknown>): void;
@@ -224,5 +247,13 @@ export abstract class Element<T extends UIElement, C extends ChildType = {}> {
 				});
 			});
 		}
+	}
+
+	onHover(callback: () => void) {
+		this.hoverCallbacks.add(callback);
+	}
+
+	onHoverEnds(callback: () => void) {
+		this.unHoverCallbacks.add(callback);
 	}
 }
