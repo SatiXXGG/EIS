@@ -26,6 +26,7 @@ interface EISRootElements {
 export class EIS {
 	private root: EISRootElements;
 	private main: ScreenGui | Frame | Folder;
+	public static debugMode = false;
 
 	constructor(root: EISRootElements, main: ScreenGui | Frame | Folder) {
 		this.root = root;
@@ -46,7 +47,17 @@ export class EIS {
 				const search = lastIndexer.WaitForChild(key, 1) as UIElement | undefined;
 				if (search) {
 					const call = value as EISRootCallback;
+
+					if (EIS.debugMode) {
+						print("Mapping: " + key + " --->" + search.Name);
+					}
+
 					const result = call(search);
+
+					if (EIS.debugMode) {
+						print("-----> Mapped: " + key + " --->" + result);
+					}
+
 					parent[key] = result as unknown as EISRootCallback;
 
 					setup(result.childs as unknown as EISRootElements, search);

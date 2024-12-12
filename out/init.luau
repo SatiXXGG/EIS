@@ -15,6 +15,9 @@ do
 		self.root = root
 		self.main = main
 	end
+	function EIS:changeRootParent(newParent)
+		self.main.Parent = newParent
+	end
 	function EIS:render()
 		local setup
 		setup = function(parent, lastIndexer)
