@@ -134,7 +134,7 @@ do
 		if info == nil then
 			info = TweenInfo.new(1)
 		end
-		local uiScale = self.element:FindFirstAncestorWhichIsA("UIScale")
+		local uiScale = self.element:FindFirstChildWhichIsA("UIScale")
 		if uiScale then
 			local tween = TweenService:Create(uiScale, info, {
 				Scale = scale,

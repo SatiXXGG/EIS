@@ -2,6 +2,7 @@ import { UIElement } from "./generic";
 import { CustomFolder } from "./UIElements/CustomFolder";
 import { CustomFrame } from "./UIElements/CustomFrame";
 import { CustomImageButton } from "./UIElements/ImageButton";
+import { CustomImageLabel } from "./UIElements/ImageLabel";
 import { CustomTextBox } from "./UIElements/TextBox";
 import { CustomTextButton } from "./UIElements/TextButton";
 import { CustomTextLabel } from "./UIElements/TextLabel";
@@ -12,7 +13,9 @@ export type CustomEISElements =
 	| CustomFrame
 	| CustomTextBox
 	| CustomImageButton
-	| CustomFolder;
+	| CustomFolder
+	| CustomImageLabel;
+
 export type EISRootCallback = (eis: UIElement) => CustomEISElements;
 export type ChildType = { [key: string]: EISRootCallback | CustomEISElements };
 
@@ -22,11 +25,15 @@ interface EISRootElements {
 
 export class EIS {
 	private root: EISRootElements;
-	private main: ScreenGui;
+	private main: ScreenGui | Frame | Folder;
 
-	constructor(root: EISRootElements, main: ScreenGui) {
+	constructor(root: EISRootElements, main: ScreenGui | Frame | Folder) {
 		this.root = root;
 		this.main = main;
+	}
+
+	changeRootParent(newParent: Instance) {
+		this.main.Parent = newParent;
 	}
 
 	/**
