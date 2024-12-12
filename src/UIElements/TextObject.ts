@@ -2,6 +2,8 @@ import { ChildType } from "..";
 import { Value } from "../Elements/Value";
 import { Element } from "../generic";
 
+const TweenService = game.GetService("TweenService");
+
 export abstract class TextObject<T extends TextLabel | TextButton | TextBox, C extends ChildType> extends Element<
 	T,
 	C
@@ -109,6 +111,22 @@ export abstract class TextObject<T extends TextLabel | TextButton | TextBox, C e
 					i = 0;
 				}
 			}
+		});
+	}
+
+	setTextColor(color: Color3) {
+		this.element.TextColor3 = color;
+	}
+
+	tweenTextColor(color: Color3, info: TweenInfo = new TweenInfo(1)) {
+		const tween = TweenService.Create(this.element as TextLabel, info, {
+			TextColor3: color,
+		});
+		return new Promise((resolve, reject) => {
+			tween.Play();
+			tween.Completed.Once(() => {
+				resolve(true);
+			});
 		});
 	}
 }

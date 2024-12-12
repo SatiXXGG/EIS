@@ -17,6 +17,7 @@ interface EISRootElements {
 export declare class EIS {
     private root;
     private main;
+    static debugMode: boolean;
     constructor(root: EISRootElements, main: ScreenGui | Frame | Folder);
     changeRootParent(newParent: Instance): void;
     /**

@@ -25,7 +25,13 @@ do
 				local search = lastIndexer:WaitForChild(key, 1)
 				if search then
 					local call = value
+					if EIS.debugMode then
+						print("Mapping: " .. tostring(key) .. " --->" .. search.Name)
+					end
 					local result = call(search)
+					if EIS.debugMode then
+						print("-----> Mapped: " .. tostring(key) .. " --->" .. tostring(result))
+					end
 					parent[key] = result
 					setup(result.childs, search)
 				end
@@ -35,6 +41,7 @@ do
 		setup(clone, self.main)
 		return clone
 	end
+	EIS.debugMode = false
 end
 return {
 	EIS = EIS,
