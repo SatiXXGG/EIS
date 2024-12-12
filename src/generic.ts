@@ -1,4 +1,4 @@
-import { ChildType, CustomEISElements } from ".";
+import { ChildType, CustomEISElements, EIS } from ".";
 import { Value } from "./Elements/Value";
 
 export type UIElement = TextLabel | TextBox | ImageButton | ImageLabel | TextButton | Frame;
@@ -220,6 +220,7 @@ export abstract class Element<T extends UIElement, C extends ChildType = {}> {
 	destroyChilds(checker: (child: CustomEISElements) => boolean) {
 		for (const [name, child] of pairs(this.childs as ChildType)) {
 			const result = checker(child as CustomEISElements);
+			if (EIS.debugMode) print("Deleting " + name + " with result ---> " + result);
 			if (result) {
 				const a = child as CustomEISElements;
 				a.element.Destroy();
@@ -246,6 +247,8 @@ export abstract class Element<T extends UIElement, C extends ChildType = {}> {
 					resolve(true);
 				});
 			});
+		} else {
+			warn("There isn't any UIScale member on the element " + this.element.Name);
 		}
 	}
 

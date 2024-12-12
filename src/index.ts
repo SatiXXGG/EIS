@@ -52,6 +52,10 @@ export class EIS {
 						print("Mapping: " + key + " --->" + search.Name);
 					}
 
+					if (type(call) !== "function") {
+						error("Error: " + key + " is not a EISRootCallback");
+					}
+
 					const result = call(search);
 
 					if (EIS.debugMode) {

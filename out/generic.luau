@@ -25,7 +25,7 @@ do
 				end
 				-- ▲ ReadonlySet.forEach ▲
 				if self.hoverScaleEffect then
-					self:tweenScale(1.1)
+					self:tweenScale(1.1, self.hoverScaleEffectInfo)
 				end
 			end
 		end)
@@ -41,7 +41,7 @@ do
 				end
 				-- ▲ ReadonlySet.forEach ▲
 				if self.hoverScaleEffect then
-					self:tweenScale(1)
+					self:tweenScale(1, self.hoverScaleEffectInfo)
 				end
 			end
 		end)
