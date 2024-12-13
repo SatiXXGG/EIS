@@ -45,6 +45,7 @@ export abstract class Element<T extends UIElement, C extends ChildType = {}> {
 
 	destroy() {
 		this.element.Destroy();
+		this.unusable = true;
 	}
 
 	/**
@@ -202,7 +203,6 @@ export abstract class Element<T extends UIElement, C extends ChildType = {}> {
 			const a = child as E;
 			if (!a.unusable) {
 				const result = checker(child as E);
-				print(result);
 				if (result) {
 					filteredItems.add(child as E);
 				}

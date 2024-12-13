@@ -28,6 +28,9 @@ do
 					if EIS.debugMode then
 						print("Mapping: " .. tostring(key) .. " --->" .. search.Name)
 					end
+					if type(call) ~= "function" then
+						error("Error: " .. tostring(key) .. " is not a EISRootCallback")
+					end
 					local result = call(search)
 					if EIS.debugMode then
 						print("-----> Mapped: " .. tostring(key) .. " --->" .. tostring(result))

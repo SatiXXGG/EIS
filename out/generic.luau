@@ -1,5 +1,6 @@
 -- Compiled with roblox-ts v3.0.0
 local TS = _G[script]
+local EIS = TS.import(script, script.Parent).EIS
 local TweenService = game:GetService("TweenService")
 local Element
 do
@@ -159,6 +160,9 @@ do
 	function Element:destroyChilds(checker)
 		for name, child in pairs(self.childs) do
 			local result = checker(child)
+			if EIS.debugMode then
+				print("Deleting " .. tostring(name) .. " with result ---> " .. tostring(result))
+			end
 			if result then
 				local a = child
 				a.element:Destroy()
@@ -181,6 +185,8 @@ do
 					resolve(true)
 				end)
 			end)
+		else
+			warn("There isn't any UIScale member on the element " .. self.element.Name)
 		end
 	end
 	function Element:onHover(callback)
