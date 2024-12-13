@@ -20,7 +20,7 @@ export type CustomEISElements =
 export type EISRootCallback = (eis: UIElement) => CustomEISElements | GenericChilds<Element<UIElement>>;
 export type ChildType = { [key: string]: EISRootCallback | CustomEISElements | GenericChilds<Element<UIElement>> };
 
-interface EISRootElements {
+export interface EISRootElements {
 	[key: string]: EISRootCallback | EISRootElements;
 }
 
@@ -42,36 +42,37 @@ export class EIS {
 	 * MAPS EVERYTHING IN THE ROOT TO THE EIS ELEMENTS
 	 * @yields
 	 */
-	render<T>(): T {
-		const setup = (parent: EISRootElements, lastIndexer: UIElement | ScreenGui | Folder) => {
-			for (const [key, value] of pairs(parent)) {
-				const search = lastIndexer.WaitForChild(key, 1) as UIElement | undefined;
-				if (search) {
-					const call = value as EISRootCallback;
 
-					if (EIS.debugMode) {
-						print("Mapping: " + key + " --->" + search.Name);
-					}
+	static setupSingle(parent: EISRootElements, lastIndexer: UIElement | ScreenGui | Folder) {
+		for (const [key, value] of pairs(parent)) {
+			const search = lastIndexer.WaitForChild(key, 1) as UIElement | undefined;
+			if (search) {
+				const call = value as EISRootCallback;
 
-					if (type(call) !== "function") {
-						error("Error: " + key + " is not a EISRootCallback");
-					}
-
-					const result = call(search);
-
-					if (EIS.debugMode) {
-						print("-----> Mapped: " + key + " --->" + result);
-					}
-
-					parent[key] = result as unknown as EISRootCallback;
-
-					setup(result.childs as unknown as EISRootElements, search);
+				if (EIS.debugMode) {
+					print("Mapping: " + key + " --->" + search.Name);
 				}
-			}
-		};
 
+				if (type(call) !== "function") {
+					error("Error: " + key + " is not a EISRootCallback");
+				}
+
+				const result = call(search);
+
+				if (EIS.debugMode) {
+					print("-----> Mapped: " + key + " --->" + result);
+				}
+
+				parent[key] = result as unknown as EISRootCallback;
+
+				EIS.setupSingle(result.childs as unknown as EISRootElements, search);
+			}
+		}
+	}
+
+	render<T>(): T {
 		const clone = this.root as EISRootElements;
-		setup(clone, this.main);
+		EIS.setupSingle(clone, this.main);
 		return clone as T;
 	}
 }

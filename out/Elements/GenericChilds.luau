@@ -13,6 +13,7 @@ do
 	end
 	function GenericChilds:constructor(x, childs)
 		self.childs = {}
+		self.element = x
 		for _, child in childs do
 			self.childs[child] = true
 		end

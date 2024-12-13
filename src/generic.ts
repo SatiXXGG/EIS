@@ -1,4 +1,4 @@
-import { ChildType, CustomEISElements, EIS } from ".";
+import { ChildType, CustomEISElements, EIS, EISRootElements } from ".";
 import { Value } from "./Elements/Value";
 
 export type UIElement = TextLabel | TextBox | ImageButton | ImageLabel | TextButton | Frame;
@@ -252,11 +252,36 @@ export abstract class Element<T extends UIElement, C extends ChildType = {}> {
 		}
 	}
 
+	/**
+	 * When the mouse enters the UI
+	 * @param callback
+	 */
+
 	onHover(callback: () => void) {
 		this.hoverCallbacks.add(callback);
 	}
+	/**
+	 * When the mouse leaves the UI
+	 * @param callback
+	 */
 
 	onHoverEnds(callback: () => void) {
 		this.unHoverCallbacks.add(callback);
+	}
+
+	/**
+	 * THIS FUNCTION SHOULD BE USED ONLY WHEN YOU CREATE THIS ELEMENT OUT OF A ROOT AND A .render() method
+	 *
+	 * warn: THIS FUNCTION DOESN'T HAVE TYPE SAFETY SO USE ON YOUR OWN RISK
+
+	 * @yields
+	 * @borrows
+	 * @variation
+	 * @experimental
+	 */
+	setupChilds() {
+		const clone = this.childs as EISRootElements;
+		EIS.setupSingle(clone, this.element);
+		this.childs = clone as C;
 	}
 }
