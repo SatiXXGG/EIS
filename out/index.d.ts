@@ -8,7 +8,7 @@ import { CustomTextBox } from "./UIElements/TextBox";
 import { CustomTextButton } from "./UIElements/TextButton";
 import { CustomTextLabel } from "./UIElements/TextLabel";
 export type CustomEISElements = CustomTextLabel | CustomTextButton | CustomFrame | CustomTextBox | CustomImageButton | CustomFolder | CustomImageLabel;
-export type EISRootCallback = (eis: UIElement) => CustomEISElements;
+export type EISRootCallback = (eis: UIElement) => CustomEISElements | GenericChilds;
 export type ChildType = {
     [key: string]: EISRootCallback | CustomEISElements | GenericChilds;
 };

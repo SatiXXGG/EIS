@@ -1,10 +1,11 @@
 import { CustomEISElements } from "..";
 import { Element, UIElement } from "../generic";
 
-export class GenericChilds<T extends Element<UIElement> = Element<TextButton, {}>> {
+export class GenericChilds<T extends Element<UIElement>> {
 	public readonly childs = new Set<T>();
-
+	public element: UIElement;
 	constructor(x: UIElement, childs: T[]) {
+		this.element = x;
 		for (const child of childs) {
 			this.childs.add(child as T);
 		}
