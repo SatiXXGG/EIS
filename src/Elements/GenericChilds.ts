@@ -1,7 +1,7 @@
 import { CustomEISElements } from "..";
 import { Element, UIElement } from "../generic";
 
-export class GenericChilds<T extends Element<UIElement> = Element<UIElement>> {
+export class GenericChilds<T extends Element<UIElement> = Element<TextButton, {}>> {
 	public readonly childs = new Set<T>();
 
 	constructor(x: UIElement, childs: T[]) {

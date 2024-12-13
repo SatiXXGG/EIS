@@ -15,11 +15,10 @@ export type CustomEISElements =
 	| CustomTextBox
 	| CustomImageButton
 	| CustomFolder
-	| CustomImageLabel
-	| GenericChilds;
+	| CustomImageLabel;
 
 export type EISRootCallback = (eis: UIElement) => CustomEISElements;
-export type ChildType = { [key: string]: EISRootCallback | CustomEISElements };
+export type ChildType = { [key: string]: EISRootCallback | CustomEISElements | GenericChilds };
 
 interface EISRootElements {
 	[key: string]: EISRootCallback | EISRootElements;
