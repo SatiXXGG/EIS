@@ -17,7 +17,7 @@ export type CustomEISElements =
 	| CustomFolder
 	| CustomImageLabel;
 
-export type EISRootCallback = (eis: UIElement) => CustomEISElements;
+export type EISRootCallback = (eis: UIElement) => CustomEISElements | GenericChilds;
 export type ChildType = { [key: string]: EISRootCallback | CustomEISElements | GenericChilds };
 
 interface EISRootElements {

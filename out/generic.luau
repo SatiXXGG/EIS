@@ -49,6 +49,7 @@ do
 	end
 	function Element:destroy()
 		self.element:Destroy()
+		self.unusable = true
 	end
 	function Element:setVisible(value)
 		self.element.Visible = value
@@ -149,7 +150,6 @@ do
 			local a = child
 			if not a.unusable then
 				local result = checker(child)
-				print(result)
 				if result then
 					filteredItems[child] = true
 				end
