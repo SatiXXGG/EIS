@@ -89,6 +89,25 @@ export declare abstract class Element<T extends UIElement, C extends ChildType =
      * @param info Tween info
      */
     tweenScale(scale: number, info?: TweenInfo): Promise<unknown> | undefined;
+    /**
+     * When the mouse enters the UI
+     * @param callback
+     */
     onHover(callback: () => void): void;
+    /**
+     * When the mouse leaves the UI
+     * @param callback
+     */
     onHoverEnds(callback: () => void): void;
+    /**
+     * THIS FUNCTION SHOULD BE USED ONLY WHEN YOU CREATE THIS ELEMENT OUT OF A ROOT AND A .render() method
+     *
+     * warn: THIS FUNCTION DOESN'T HAVE TYPE SAFETY SO USE ON YOUR OWN RISK
+
+     * @yields
+     * @borrows
+     * @variation
+     * @experimental
+     */
+    setupChilds(): void;
 }

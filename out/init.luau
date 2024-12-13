@@ -18,30 +18,29 @@ do
 	function EIS:changeRootParent(newParent)
 		self.main.Parent = newParent
 	end
-	function EIS:render()
-		local setup
-		setup = function(parent, lastIndexer)
-			for key, value in pairs(parent) do
-				local search = lastIndexer:WaitForChild(key, 1)
-				if search then
-					local call = value
-					if EIS.debugMode then
-						print("Mapping: " .. tostring(key) .. " --->" .. search.Name)
-					end
-					if type(call) ~= "function" then
-						error("Error: " .. tostring(key) .. " is not a EISRootCallback")
-					end
-					local result = call(search)
-					if EIS.debugMode then
-						print("-----> Mapped: " .. tostring(key) .. " --->" .. tostring(result))
-					end
-					parent[key] = result
-					setup(result.childs, search)
+	function EIS:setupSingle(parent, lastIndexer)
+		for key, value in pairs(parent) do
+			local search = lastIndexer:WaitForChild(key, 1)
+			if search then
+				local call = value
+				if EIS.debugMode then
+					print("Mapping: " .. tostring(key) .. " --->" .. search.Name)
 				end
+				if type(call) ~= "function" then
+					error("Error: " .. tostring(key) .. " is not a EISRootCallback")
+				end
+				local result = call(search)
+				if EIS.debugMode then
+					print("-----> Mapped: " .. tostring(key) .. " --->" .. tostring(result))
+				end
+				parent[key] = result
+				EIS:setupSingle(result.childs, search)
 			end
 		end
+	end
+	function EIS:render()
 		local clone = self.root
-		setup(clone, self.main)
+		EIS:setupSingle(clone, self.main)
 		return clone
 	end
 	EIS.debugMode = false

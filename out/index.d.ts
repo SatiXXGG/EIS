@@ -12,7 +12,7 @@ export type EISRootCallback = (eis: UIElement) => CustomEISElements | GenericChi
 export type ChildType = {
     [key: string]: EISRootCallback | CustomEISElements | GenericChilds<Element<UIElement>>;
 };
-interface EISRootElements {
+export interface EISRootElements {
     [key: string]: EISRootCallback | EISRootElements;
 }
 export declare class EIS {
@@ -25,6 +25,6 @@ export declare class EIS {
      * MAPS EVERYTHING IN THE ROOT TO THE EIS ELEMENTS
      * @yields
      */
+    static setupSingle(parent: EISRootElements, lastIndexer: UIElement | ScreenGui | Folder): void;
     render<T>(): T;
 }
-export {};

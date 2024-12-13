@@ -279,9 +279,10 @@ export abstract class Element<T extends UIElement, C extends ChildType = {}> {
 	 * @variation
 	 * @experimental
 	 */
-	setupChilds() {
+	setupChilds<L>() {
 		const clone = this.childs as EISRootElements;
 		EIS.setupSingle(clone, this.element);
 		this.childs = clone as C;
+		return clone as L;
 	}
 }
