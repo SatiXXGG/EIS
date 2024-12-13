@@ -273,12 +273,16 @@ export abstract class Element<T extends UIElement, C extends ChildType = {}> {
 	 * THIS FUNCTION SHOULD BE USED ONLY WHEN YOU CREATE THIS ELEMENT OUT OF A ROOT AND A .render() method
 	 *
 	 * warn: THIS FUNCTION DOESN'T HAVE TYPE SAFETY SO USE ON YOUR OWN RISK
-
 	 * @yields
 	 * @borrows
 	 * @variation
 	 * @experimental
 	 */
+
+	changeParent(parent: Instance) {
+		this.element.Parent = parent;
+	}
+
 	setupChilds<L>() {
 		const clone = this.childs as EISRootElements;
 		EIS.setupSingle(clone, this.element);

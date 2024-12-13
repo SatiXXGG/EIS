@@ -109,5 +109,5 @@ export declare abstract class Element<T extends UIElement, C extends ChildType =
      * @variation
      * @experimental
      */
-    setupChilds(): void;
+    setupChilds<L>(): L;
 }

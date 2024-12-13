@@ -203,6 +203,7 @@ do
 		local clone = self.childs
 		EIS:setupSingle(clone, self.element)
 		self.childs = clone
+		return clone
 	end
 end
 return {
