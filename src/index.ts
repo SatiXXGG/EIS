@@ -7,6 +7,7 @@ import { CustomImageLabel } from "./UIElements/ImageLabel";
 import { CustomTextBox } from "./UIElements/TextBox";
 import { CustomTextButton } from "./UIElements/TextButton";
 import { CustomTextLabel } from "./UIElements/TextLabel";
+import { CustomViewportFrame } from "./UIElements/ViewportFrame";
 
 export type CustomEISElements =
 	| CustomTextLabel
@@ -15,7 +16,8 @@ export type CustomEISElements =
 	| CustomTextBox
 	| CustomImageButton
 	| CustomFolder
-	| CustomImageLabel;
+	| CustomImageLabel
+	| CustomViewportFrame;
 
 export type EISRootCallback = (eis: UIElement) => CustomEISElements | GenericChilds<Element<UIElement>>;
 export type ChildType = { [key: string]: EISRootCallback | CustomEISElements | GenericChilds<Element<UIElement>> };

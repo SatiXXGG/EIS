@@ -103,11 +103,11 @@ export declare abstract class Element<T extends UIElement, C extends ChildType =
      * THIS FUNCTION SHOULD BE USED ONLY WHEN YOU CREATE THIS ELEMENT OUT OF A ROOT AND A .render() method
      *
      * warn: THIS FUNCTION DOESN'T HAVE TYPE SAFETY SO USE ON YOUR OWN RISK
-
      * @yields
      * @borrows
      * @variation
      * @experimental
      */
+    changeParent(parent: Instance): void;
     setupChilds<L>(): L;
 }

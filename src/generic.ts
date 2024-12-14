@@ -1,7 +1,7 @@
 import { ChildType, CustomEISElements, EIS, EISRootElements } from ".";
 import { Value } from "./Elements/Value";
 
-export type UIElement = TextLabel | TextBox | ImageButton | ImageLabel | TextButton | Frame;
+export type UIElement = TextLabel | TextBox | ImageButton | ImageLabel | TextButton | Frame | ViewportFrame;
 const TweenService = game.GetService("TweenService");
 export abstract class Element<T extends UIElement, C extends ChildType = {}> {
 	public element: T;

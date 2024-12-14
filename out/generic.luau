@@ -199,6 +199,9 @@ do
 		local _callback = callback
 		_unHoverCallbacks[_callback] = true
 	end
+	function Element:changeParent(parent)
+		self.element.Parent = parent
+	end
 	function Element:setupChilds()
 		local clone = self.childs
 		EIS:setupSingle(clone, self.element)
